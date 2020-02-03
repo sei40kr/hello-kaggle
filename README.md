@@ -21,3 +21,9 @@ Where I solve Kaggle problems.
    ```sh
    pip install -r requirements.txt
    ```
+
+## Tools
+
+- [Org mode for Emacs](https://orgmode.org/ja)
+- [The Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/stable)
+- [emacs-jupyter](https://github.com/dzop/emacs-jupyter)
