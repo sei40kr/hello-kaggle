@@ -1,0 +1,101 @@
+#+BEGIN_SRC jupyter-python :session py
+import pandas as pd
+pd.plotting.register_matplotlib_converters()
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-python :session python
+flight_filepath = '../../data/input/flight_delays.csv'
+
+flight_data = pd.read_csv(flight_filepath, index_col='Month')
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-python :session python
+flight_data
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+             AA        AS         B6        DL         EV         F9  \
+Month
+1      6.955843 -0.320888   7.347281 -2.043847   8.537497  18.357238
+2      7.530204 -0.782923  18.657673  5.614745  10.417236  27.424179
+3      6.693587 -0.544731  10.741317  2.077965   6.730101  20.074855
+4      4.931778 -3.009003   2.780105  0.083343   4.821253  12.640440
+5      5.173878 -1.716398  -0.709019  0.149333   7.724290  13.007554
+6      8.191017 -0.220621   5.047155  4.419594  13.952793  19.712951
+7      3.870440  0.377408   5.841454  1.204862   6.926421  14.464543
+8      3.193907  2.503899   9.280950  0.653114   5.154422   9.175737
+9     -1.432732 -1.813800   3.539154 -3.703377   0.851062   0.978460
+10    -0.580930 -2.993617   3.676787 -5.011516   2.303760   0.082127
+11     0.772630 -1.916516   1.418299 -3.175414   4.415930  11.164527
+12     4.149684 -1.846681  13.839290  2.504595   6.685176   9.346221
+
+             HA         MQ         NK         OO         UA        US  \
+Month
+1      3.512640  18.164974  11.398054  10.889894   6.352729  3.107457
+2      6.029967  21.301627  16.474466   9.588895   7.260662  7.114455
+3      3.468383  11.018418  10.039118   3.181693   4.892212  3.330787
+4      0.011022   5.131228   8.766224   3.223796   4.376092  2.660290
+5      0.826426   5.466790  22.397347   4.141162   6.827695  0.681605
+6      0.882786   9.639323  35.561501   8.338477  16.932663  5.766296
+7      2.001586   3.980289  14.352382   6.790333  10.262551       NaN
+8      7.448029   1.896565  20.519018   5.606689   5.014041       NaN
+9      3.696915  -2.167268   8.000101   1.530896  -1.794265       NaN
+10     0.467074  -3.735054   6.810736   1.750897  -2.456542       NaN
+11    -2.719894   0.220061   7.543881   4.925548   0.281064       NaN
+12    -1.706475   0.662486  12.733123  10.947612   7.012079       NaN
+
+              VX         WN
+Month
+1       1.420702   3.389466
+2       7.784410   3.501363
+3       5.348207   3.263341
+4       0.995507   2.996399
+5       7.102021   5.680777
+6       5.779415  10.743462
+7       7.135773  10.504942
+8       5.106221   5.532108
+9       0.070998  -1.336260
+10      2.254278  -0.688851
+11      0.116370   0.995684
+12     13.498720   6.720893
+#+end_example
+
+#+BEGIN_SRC jupyter-python :session python
+plt.figure(figsize=(10, 6))
+
+plt.title('Average Arrival Delay for Spirit Airlines Flights, by Month')
+
+sns.barplot(x=flight_data.index, y=flight_data['NK'])
+
+plt.ylabel('Arrival delay (in minutes)')
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: Text(0, 0.5, 'Arrival delay (in minutes)')
+[[file:./.ob-jupyter/d1f9c086f7af5b0f751415474b329c7c989d1c4b.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session python
+plt.figure(figsize=(14,7))
+
+plt.title('Average Arrival Delay for Each Airline, by Month')
+
+sns.heatmap(data=flight_data, annot=True)
+
+plt.xlabel('Airline')
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: Text(0.5, 42.0, 'Airline')
+[[file:./.ob-jupyter/790ccbc25f0777fba084dfecd758d608023ad8ca.png]]
+:END:
