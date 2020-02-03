@@ -1,0 +1,114 @@
+#+BEGIN_SRC jupyter-python :session python
+import pandas as pd
+pd.plotting.register_matplotlib_converters()
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+
+# Path of the file to read
+spotify_filepath = '../../data/input/spotify.csv'
+
+# Read the file into a variable spotify_data
+spotify_data = pd.read_csv(spotify_filepath, index_col='Date', parse_dates=True)
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-python :session python
+# Print the first 5 rows of the data
+spotify_data.head()
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+            Shape of You  Despacito  Something Just Like This  HUMBLE.  \
+Date
+2017-01-06      12287078        NaN                       NaN      NaN
+2017-01-07      13190270        NaN                       NaN      NaN
+2017-01-08      13099919        NaN                       NaN      NaN
+2017-01-09      14506351        NaN                       NaN      NaN
+2017-01-10      14275628        NaN                       NaN      NaN
+
+            Unforgettable
+Date
+2017-01-06            NaN
+2017-01-07            NaN
+2017-01-08            NaN
+2017-01-09            NaN
+2017-01-10            NaN
+#+end_example
+
+#+BEGIN_SRC jupyter-python :session python
+spotify_data.tail()
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+            Shape of You  Despacito  Something Just Like This    HUMBLE.  \
+Date
+2018-01-05       4492978  3450315.0                 2408365.0  2685857.0
+2018-01-06       4416476  3394284.0                 2188035.0  2559044.0
+2018-01-07       4009104  3020789.0                 1908129.0  2350985.0
+2018-01-08       4135505  2755266.0                 2023251.0  2523265.0
+2018-01-09       4168506  2791601.0                 2058016.0  2727678.0
+
+            Unforgettable
+Date
+2018-01-05      2869783.0
+2018-01-06      2743748.0
+2018-01-07      2441045.0
+2018-01-08      2622693.0
+2018-01-09      2627334.0
+#+end_example
+
+#+BEGIN_SRC jupyter-python :session python
+sns.lineplot(data=spotify_data)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.axes._subplots.AxesSubplot at 0x11d4f9048>
+[[file:./.ob-jupyter/55c1cef296a232d60e40042470b47b74562d03a0.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session python
+plt.figure(figsize=(14, 6))
+plt.title('Daily Global Streams of Popular Songs in 2017-2018')
+sns.lineplot(data=spotify_data)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.axes._subplots.AxesSubplot at 0x11daaa470>
+[[file:./.ob-jupyter/b71fe36e65d61fdacaec3580aef74c3f02911f96.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session python
+list(spotify_data.columns)
+#+END_SRC
+
+#+RESULTS:
+| Shape of You | Despacito | Something Just Like This | HUMBLE. | Unforgettable |
+
+#+BEGIN_SRC jupyter-python :session python
+# Set the width and height of the figure
+plt.figure(figsize=(14, 6))
+
+# Add title
+plt.title('Daily Global Streams of Popular Songs in 2017-2018')
+
+# Line chart showing daily global strams of 'Shape of You'
+sns.lineplot(data=spotify_data['Shape of You'], label='Shape of You')
+
+# Line chart showing daily global strams of 'Despacito'
+sns.lineplot(data=spotify_data['Despacito'], label='Despacito')
+
+# Add label for horizontal axis
+plt.xlabel('Date')
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: Text(0.5, 0, 'Date')
+[[file:./.ob-jupyter/4125cc6c87dd7f756b538a6fa2f5a17e800763c4.png]]
+:END:
