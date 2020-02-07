@@ -1,0 +1,37 @@
+#+BEGIN_SRC jupyter-python :session py
+from sklearn.metrics import mean_absolute_error
+from sklearn.tree import DecisionTreeRegressor
+
+def get_mae(max_leaf_nodes, train_X, val_X, train_Y, val_y):
+    model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
+    model.fit(train_X, train_y)
+    preds_val = model.predict(val_X)
+    mae = mean_absolute_error(val_y, preds_val)
+    return mae
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-python :session py
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+melbourne_file_path = '../../data/input/melb_data.csv'
+melbourne_data = pd.read_csv(melbourne_file_path)
+filtered_melbourne_data = melbourne_data.dropna(axis=0)
+
+y = filtered_melbourne_data.Price
+melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'BuildingArea', 'YearBuilt', 'Lattitude', 'Longtitude']
+X = filtered_melbourne_data[melbourne_features]
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0)
+
+for max_leaf_nodes in [5, 50, 500, 5000]:
+    my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
+    print("Max Leaf Nodes: %5d        Mean Absolute Error: %7d" % (max_leaf_nodes, my_mae))
+#+END_SRC
+
+#+RESULTS:
+: Max Leaf Nodes:     5        Mean Absolute Error:  347380
+: Max Leaf Nodes:    50        Mean Absolute Error:  258171
+: Max Leaf Nodes:   500        Mean Absolute Error:  243495
+: Max Leaf Nodes:  5000        Mean Absolute Error:  254983
