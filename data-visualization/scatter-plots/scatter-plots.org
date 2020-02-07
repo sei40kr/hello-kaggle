@@ -1,0 +1,70 @@
+#+BEGIN_SRC jupyter-python :session py
+insurance_filepath = '../../data/input/insurance.csv'
+insurance_data = pd.read_csv(insurance_filepath)
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-python :session py
+insurance_data.head()
+#+END_SRC
+
+#+RESULTS:
+:    age     sex     bmi  children smoker     region      charges
+: 0   19  female  27.900         0    yes  southwest  16884.92400
+: 1   18    male  33.770         1     no  southeast   1725.55230
+: 2   28    male  33.000         3     no  southeast   4449.46200
+: 3   33    male  22.705         0     no  northwest  21984.47061
+: 4   32    male  28.880         0     no  northwest   3866.85520
+
+#+BEGIN_SRC jupyter-python :session py
+import seaborn as sns
+
+sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'])
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.axes._subplots.AxesSubplot at 0x12c70a550>
+[[file:./.ob-jupyter/e09e1e405b59ece46fb00dabe213aa17968d7065.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session py
+sns.regplot(x=insurance_data['bmi'], y=insurance_data['charges'])
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.axes._subplots.AxesSubplot at 0x1300c4b70>
+[[file:./.ob-jupyter/51dd5cab6f9b1b9a45dc58af2b999cb6db0b152c.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session py
+sns.scatterplot(x=insurance_data['bmi'], y=insurance_data['charges'], hue=insurance_data['smoker'])
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.axes._subplots.AxesSubplot at 0x13013e9b0>
+[[file:./.ob-jupyter/f2b1509252649f69e4314ebe80ea32ad5704bb80.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session py
+sns.lmplot(x='bmi', y='charges', hue='smoker', data=insurance_data)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <seaborn.axisgrid.FacetGrid at 0x12fcf6080>
+[[file:./.ob-jupyter/726e159ac4ab8847384450af5d204fd72990af4e.png]]
+:END:
+
+#+BEGIN_SRC jupyter-python :session py
+sns.swarmplot(x=insurance_data['smoker'], y=insurance_data['charges'])
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: <matplotlib.axes._subplots.AxesSubplot at 0x1262a5cc0>
+[[file:./.ob-jupyter/ca27047e7b5afa6c2307bb99c56329b77e4ab5ad.png]]
+:END:
