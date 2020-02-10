@@ -27,3 +27,9 @@ Where I solve Kaggle problems.
 - [Org mode for Emacs](https://orgmode.org/ja)
 - [The Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/stable)
 - [emacs-jupyter](https://github.com/dzop/emacs-jupyter)
+
+## References
+
+- [Intro to Machine Learning](https://www.kaggle.com/learn/intro-to-machine-learning)
+- [Data Visualization](https://www.kaggle.com/learn/data-visualization)
+- [Intermediate Machine Learning](https://www.kaggle.com/learn/intermediate-machine-learning)
